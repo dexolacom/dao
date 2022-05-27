@@ -24,7 +24,6 @@ export const ProposalStatus = ({ status }) => {
           </TYPE.main>
         </ProposalStatusPending>
       )
-      break
     case 1:
       return (
         <ProposalStatusActive>
@@ -33,7 +32,6 @@ export const ProposalStatus = ({ status }) => {
           </TYPE.main>
         </ProposalStatusActive>
       )
-      break
     case 2:
       return (
         <ProposalStatusCancelled>
@@ -42,7 +40,6 @@ export const ProposalStatus = ({ status }) => {
           </TYPE.main>
         </ProposalStatusCancelled>
       )
-      break
     case 3:
       return (
         <ProposalStatusDefeated>
@@ -51,7 +48,6 @@ export const ProposalStatus = ({ status }) => {
           </TYPE.main>
         </ProposalStatusDefeated>
       )
-      break
     case 4:
       return (
         <ProposalStatusActive>
@@ -60,7 +56,6 @@ export const ProposalStatus = ({ status }) => {
           </TYPE.main>
         </ProposalStatusActive>
       )
-      break
     case 5:
       return (
         <ProposalStatusExecuted>
@@ -69,7 +64,6 @@ export const ProposalStatus = ({ status }) => {
           </TYPE.main>
         </ProposalStatusExecuted>
       )
-      break
 
     default:
       return (
@@ -79,7 +73,6 @@ export const ProposalStatus = ({ status }) => {
           </TYPE.main>
         </ProposalStatusExecuted>
       )
-      break
   }
 }
 

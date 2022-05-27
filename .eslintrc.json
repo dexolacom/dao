@@ -22,6 +22,8 @@
     "quotes": ["warn", "single"],
     "jsx-quotes": ["warn", "prefer-single"],
     "indent": ["warn", 2],
-    "max-len": ["warn", {"code": 120}]
+    "max-len": ["warn", {"code": 120}],
+    "@typescript-eslint/ban-ts-ignore": "off",
+    "@typescript-eslint/ban-ts-comment": "off"
   }
 }

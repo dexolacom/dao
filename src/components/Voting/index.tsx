@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import ProposalList from './ProposalList'
-import DelegationModal from './DelegationModal'
+// import DelegationModal from './DelegationModal'
 
 const Voting = () => {
-  const [isOpenDelefationModal, setIsOpenDelefationModal] = useState(false)
+  const [isOpenDelegationModal, setIsOpenDelegationModal] = useState(false)
   return (
     <>
-      <ProposalList isOpenDelefationModal={isOpenDelefationModal} setIsOpenDelefationModal={setIsOpenDelefationModal} />
-      <DelegationModal
-        isOpenDelefationModal={isOpenDelefationModal}
-        setIsOpenDelefationModal={setIsOpenDelefationModal}
-      />
+      <ProposalList isOpenDelegationModal={isOpenDelegationModal} setIsOpenDelegationModal={setIsOpenDelegationModal} />
+      {/*<DelegationModal*/}
+      {/*  isOpenDelegationModal={isOpenDelegationModal}*/}
+      {/*  setIsOpenDelegationModal={setIsOpenDelegationModal}*/}
+      {/*/>*/}
     </>
   )
 }

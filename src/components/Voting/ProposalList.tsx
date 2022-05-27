@@ -3,28 +3,25 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Web3 from 'web3'
 import { Link } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-import { isMobileOnly } from 'react-device-detect'
+// import { isMobileOnly } from 'react-device-detect'
 
-import { RowBetween, RowFlat } from '../../components/Row'
-import { AutoColumn } from '../../components/Column'
-import { ButtonPrimary } from '../../components/Button'
+// import { RowBetween, RowFlat } from '../../components/Row'
+// import { AutoColumn } from '../../components/Column'
+// import { ButtonPrimary } from '../../components/Button'
+//
+// import { TYPE } from '../../theme'
+// import ArrowIcon from '../../assets/svg/dropdownArrow.svg'
+// import { useActiveWeb3React } from '../../hooks'
+//
+// import GOVERNOR_V1_ABI from '../../constants/proposals/governorV1ABI.json'
+// import GNBU from '../../constants/proposals/gnbu.json'
+// import LOCK_STAKING_ABI_GNBU from '../../constants/abis/lockStakingRewardFixedAPY.json'
 
-import { TYPE } from '../../theme'
-import ArrowIcon from '../../assets/svg/dropdownArrow.svg'
-import { useActiveWeb3React } from '../../hooks'
-
-import GOVERNOR_V1_ABI from '../../constants/proposals/governorV1ABI.json'
-import GNBU from '../../constants/proposals/gnbu.json'
-import LOCK_STAKING_ABI_GNBU from '../../constants/abis/lockStakingRewardFixedAPY.json'
-
-import Proposal from './Proposal'
+// import Proposal from './Proposal'
 import { normalizeValue } from './helpers'
-import { log } from 'console'
-import Loader from '../../components/Loader'
-import { Flex } from 'rebass'
 
-const ProposalList = ({ isOpenDelefationModal, setIsOpenDelefationModal }) => {
+
+const ProposalList = ({ isOpenDelegationModal, setIsOpenDelegationModal }) => {
   const { t } = useTranslation()
   const { account, chainId, library, connector } = useActiveWeb3React()
 
@@ -147,17 +144,15 @@ const ProposalList = ({ isOpenDelefationModal, setIsOpenDelefationModal }) => {
 
     const isDelegate =
       +calculateProcent(free, balance) +
-        (current == 0 ? 0 : +calculateProcent(free, current)) -
-        (current == 0 ? 0 : +calculateProcent(free, balance)) >
+      (current == 0 ? 0 : +calculateProcent(free, current)) -
+      (current == 0 ? 0 : +calculateProcent(free, balance)) >
       1
-        ? true
-        : false
     // for test
     const sum = +normalizeValue(balanceHardSmall) + +normalizeValue(balanceHardBig) + +normalizeValue(balanceSoft)
     // for product
     // const sum = +normalizeValue(balanceHardSmall) + +normalizeValue(balanceHardBig)
     const minFree = normalizeValue(freeCirculationGNBU) / 1000
-    const isStaking = sum > minFree ? false : true
+    const isStaking = sum <= minFree
 
     return isDelegate && isStaking
   }
@@ -271,7 +266,7 @@ const ProposalList = ({ isOpenDelefationModal, setIsOpenDelefationModal }) => {
     if (account !== null) {
       setDisableDelegation(false)
       // init()
-      setIsOpenDelefationModal(false)
+      setIsOpenDelegationModal(false)
     }
   }, [account])
 
@@ -334,7 +329,7 @@ const ProposalList = ({ isOpenDelefationModal, setIsOpenDelefationModal }) => {
             {/*  disabled={disableDelegation}*/}
             {/*  style={{ padding: '13px', width: '148px', marginRight: '20px', backgroundColor: '#616161' }}*/}
             {/*  onClick={() => {*/}
-            {/*    setIsOpenDelefationModal(prevState => !prevState)*/}
+            {/*    setIsOpenDelegationModal(prevState => !prevState)*/}
             {/*    //@ts-ignore */}
             {/*    window.dataLayer.push({ */}
             {/*      'event': `process_start`, */}
@@ -547,7 +542,7 @@ const Circle = styled.div`
 `
 
 const Loading = styled.div`
-  display: flex
+  display: flex;
   align-items: center;
   justify-content: center;
   
