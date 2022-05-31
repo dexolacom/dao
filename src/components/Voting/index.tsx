@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ProposalList from './ProposalList'
+import ProposalList from './ProposalList/ProposalList'
 // import DelegationModal from './DelegationModal'
 
 const Voting = () => {

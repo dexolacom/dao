@@ -1,20 +1,14 @@
 // @ts-nocheck
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 // import { isMobileOnly } from 'react-device-detect'
 
-// import { RowBetween, RowFlat } from '../../components/Row'
-// import { AutoColumn } from '../../components/Column'
-// import { ButtonPrimary } from '../../components/Button'
-
 // import Proposal from './Proposal'
-import { normalizeValue } from './helpers'
-import { useActiveWeb3React } from '../hooks/useActiveWeb3React';
+import { normalizeValue } from '../../constants/helpers'
+import { useActiveWeb3React } from '../../hooks/useActiveWeb3React';
 
 
 const ProposalList = ({ isOpenDelegationModal, setIsOpenDelegationModal }) => {
-  const { t } = useTranslation()
   const { account, chainId, library, connector } = useActiveWeb3React()
 
   const [disableDelegation, setDisableDelegation] = useState(true)
@@ -392,151 +386,3 @@ const ProposalList = ({ isOpenDelegationModal, setIsOpenDelegationModal }) => {
 }
 
 export default ProposalList
-
-const VotingWrapper = styled(AutoColumn)`
-  /*display: flex;*/
-  /*display: grid;*/
-  position: relative;
-  /* top: 155px; */
-  flex-direction: column;
-  /*styles above for fixed position*/
-  /* width: 1013px; */
-  max-width: 931px;
-  //margin-top: -40px;
-  padding-bottom: 32px;
-`
-
-const TitleContainer = styled.h1`
-  display: flex;
-  align-items: center;
-  font-weight: 600;
-  font-size: 48px;
-  margin: 0 0 16px 0;
-
-  img {
-    margin-left: 10px;
-  }
-`
-
-const SortSelectWrap = styled.div`
-  position: relative;
-  &:after {
-    content: '';
-    display: block;
-    width: 14px;
-    height: 8px;
-    position: absolute;
-    right: 24px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: url('${ArrowIcon}')
-  }
-
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    margin-top: 20px;
-  `};
-`
-
-const ButtonWrapper = styled(RowFlat)`
-  float: 'right';
-  @media (max-width: 721px) {
-    width: 100%;
-    justify-content: space-between;
-  }
-`
-
-const SortSelect = styled.select`
-  width: 204px;
-  height: 46px;
-  background: #343434;
-  border-radius: 12px;
-  border: none;
-  font-size: 14px;
-  font-weight: 600;
-  color: #ffffff;
-  padding: 14px 23px;
-  -webkit-appearance:none;
-  -moz-appearance:none;
-  appearance:none;
-  font-family: 'IBM Plex Sans',sans-serif;
-  &:after {
-    content: '';
-    display: block;
-    width: 12px;
-    height: 6px;
-    background: url('${ArrowIcon}')
-  }
-`
-
-const ErrorContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 24px;
-  background: #eb491d;
-  border-radius: 20px;
-
-  span {
-    font-size: 20px;
-    font-weight: 600;
-  }
-`
-
-const Circle = styled.div`
-  width: 24px;
-  height: 24px;
-  background: #000;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 24px;
-  font-size: 15px;
-  color: #fff;
-  font-weight: 700;
-  text-align: center;
-`
-
-const Loading = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
-  p {
-  font-size: 20px;
-  line-height: 32px;
-  color: #8E8E8E;
-  }
-`
-const NoWalletMessage = styled.p`
-  font-weight: 600;
-  border: 1px solid #cb4304;
-  padding: 10px 20px;
-  border-radius: 10px;
-`
-
-const ListHeader = styled.div`
-  display: grid;
-  grid-auto-flow: column;
-  /* grid-template-columns: 63px 299px 175px 89px 123px 123px 93px; */
-  grid-template-columns: 6.53% 30.98% 18.13% 9.22% 12.75% 12.75% 9.64%;
-  align-items: center;
-  padding: 0px 24px;
-  font-size: 13px;
-  color: rgb(142, 142, 142);
-
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-    display: none;
-  `}
-`
-
-const EmptyList = styled.p`
-  font-size: 20px;
-  line-height: 32px;
-  color: #8e8e8e;
-  text-align: center;
-`
-
-const StyledRowBetween = styled(RowBetween)`
-  ${({ theme }) => theme.mediaWidth.upToSmall`
-    flex-direction: column-reverse;
-  `};
-`
