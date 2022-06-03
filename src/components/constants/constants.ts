@@ -27,7 +27,7 @@ const DELEGATIES_TOKEN_CONTRACT = new web3.eth.Contract(
     : process.env.REACT_APP_DELEGATIES_TOKEN_CONTRACT
 )
 const GNBU_TOKEN_CONTRACT = new web3.eth.Contract(
-  GNBU_ABI,
+  GNBU_ABI as any,
   // @ts-ignore
   chainId == 97 || chainId == 56
     ? '0xA4d872235dde5694AF92a1d0df20d723E8e9E5fC'
@@ -54,3 +54,14 @@ const LOCK_STAKING_CONTRACT_SOFT = new web3.eth.Contract(
     ? '0x31557dB0c6F614116Fe48Cb5f5CB5E3d8Aa20379'
     : process.env.REACT_APP_LOCK_STAKING_GNBU_SOFT_CONTRACT
 )
+
+export const RPC = {
+ 1: "https://mainnet.infura.io/v3/....",
+ 3: "https://ropsten.infura.io/v3/....",
+ 4: "https://rinkeby.infura.io/v3/....",
+ 5: "https://goerly.infura.io/v3/....",
+ 42: "https://kovan.infura.io/v3/....",
+ 56: "https://bsc-dataseed.binance.org/",
+ 97: "https://data-seed-prebsc-2-s3.binance.org:8545",
+ 250: "https://rpc.ftm.tools",
+};
