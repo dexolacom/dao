@@ -6,7 +6,12 @@ import { useWeb3React } from '@web3-react/core'
 
 // import Proposal from './Proposal'
 import { normalizeValue } from '../../constants/helpers'
-import { web3 } from '../../constants/constants';
+import {
+  DELEGATIES_TOKEN_CONTRACT,
+  LOCK_STAKING_GNBU_HARD_BIG_CONTRACT,
+  LOCK_STAKING_GNBU_HARD_SMALL_CONTRACT, PROPOSALS_TOKEN_CONTRACT,
+  web3,
+} from '../../constants/constants';
 
 
 const ProposalList = ({ isOpenDelegationModal, setIsOpenDelegationModal }) => {
