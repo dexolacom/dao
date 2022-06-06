@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import ProposalList from './ProposalList/ProposalList'
+import { ConnectButton } from 'tech-web3-connector';
+import { RPC } from '../constants/constants';
 // import DelegationModal from './DelegationModal'
 
 const Voting = () => {

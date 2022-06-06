@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 // import { isMobileOnly } from 'react-device-detect'
 import { useWeb3React } from '@web3-react/core'
+import {Wrapper, ProposalButton, Title} from './styles';
 
 // import Proposal from './Proposal'
 import { normalizeValue } from '../../constants/helpers'
@@ -204,8 +205,6 @@ const ProposalList = ({ isOpenDelegationModal, setIsOpenDelegationModal }) => {
     initCheckHardStakingValue()
   }
 
-  console.log(chainId);
-
   useEffect(() => {
     if (account !== null) {
       accessOrError()
@@ -226,170 +225,13 @@ const ProposalList = ({ isOpenDelegationModal, setIsOpenDelegationModal }) => {
     }
   }, [account])
 
-  const TitleBlock = () => (
-    <>
-      <TitleContainer>{t('voting.nimbusDAO')}</TitleContainer>
-      <p style={{ fontSize: 24, marginBottom: 40, lineHeight: '32px', maxWidth: '750px', margin: ' 0 0 35px' }}>
-        {/*{t('voting.nimbusDAODescription')}*/}
-      </p>
-    </>
-  )
-
-  const VotingBanner = () => (
-    <ErrorContainer>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-        {/*<span>{t('voting.notEnoughVotingRights')}</span>*/}
-        {/* <Circle>?</Circle> */}
-      </div>
-
-      {/*<p>{t('voting.notEnoughVotingRightsDescription')}</p>*/}
-    </ErrorContainer>
-  )
-
-  const StakingBanner = () => (
-    <ErrorContainer>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-        {/*<span>{t('voting.notEnoughGNBUInStaking')}</span>*/}
-        {/* <Circle>?</Circle> */}
-      </div>
-
-      {/*<p>{t('voting.notEnoughGNBUInStakingDescription')}</p>*/}
-    </ErrorContainer>
-  )
-
   return (
-    <>
-      {/*<VotingWrapper gap={'16px'}>*/}
-      {/*  {!isMobileOnly && <TitleBlock />}*/}
-        {showBannerVoting ? <VotingBanner /> : showBannerStaking && <StakingBanner />}
-        <div>
-          <div style={{ visibility: 'visible' }}>
-            <div className={'at-click at-srt-date'} defaultValue="" name="test" id="">
-              <option value="" disabled hidden>
-                {/*{t('voting.sortByDate')}*/}
-              </option>
-              <option className={'at-click at-dd-srt-date-votes'} value="1">
-                {/*{t('voting.votes')}*/}
-              </option>
-              <option className={'at-click at-dd-srt-date-name'} value="2">
-                {/*{t('voting.name')}*/}
-              </option>
-              <option className={'at-click at-dd-srt-date-id'} value="3">
-                {/*{t('voting.id')}*/}
-              </option>
-            </div>
-          </div>
-          {/*<ButtonWrapper>*/}
-            {/*<ButtonPrimary*/}
-            {/*  className={'at-click at-new-delegration'}*/}
-            {/*  disabled={disableDelegation}*/}
-            {/*  style={{ padding: '13px', width: '148px', marginRight: '20px', backgroundColor: '#616161' }}*/}
-            {/*  onClick={() => {*/}
-            {/*    setIsOpenDelegationModal(prevState => !prevState)*/}
-            {/*    //@ts-ignore */}
-            {/*    window.dataLayer.push({ */}
-            {/*      'event': `process_start`, */}
-            {/*      'process': `Voting New delegation`, */}
-            {/*      'step_name': `Create new proposal` */}
-            {/*    })*/}
-            {/*  }}*/}
-            {/*>*/}
-            {/*  <TYPE.white fontWeight={600} fontSize={14}>*/}
-            {/*    {t('voting.newDelegation')}*/}
-            {/*  </TYPE.white>*/}
-            {/*</ButtonPrimary>*/}
-            {/*<ButtonPrimary*/}
-            {/*  onClick={() => {*/}
-            {/*    //@ts-ignore*/}
-            {/*    window.dataLayer.push({*/}
-            {/*      event: `process_start`,*/}
-            {/*      process: `Voting create new proposal`,*/}
-            {/*      step_name: `Create new proposal`*/}
-            {/*    })*/}
-            {/*  }}*/}
-            {/*  className={'at-click at-crt-proposal'}*/}
-            {/*  as={Link}*/}
-            {/*  to="/voting/create"*/}
-            {/*  style={{ padding: '13px', width: '180px' }}*/}
-            {/*>*/}
-            {/*  <TYPE.white fontWeight={600} fontSize={14}>*/}
-            {/*    /!*{t('voting.createNewProposal')}*!/*/}
-            {/*  </TYPE.white>*/}
-            {/*</ButtonPrimary>*/}
-            {/* {showBannerStaking || showBannerVoting ? (
-              <ButtonPrimary
-                disabled={true}
-                style={{
-                  padding: '13px',
-                  width: '180px',
-                  backgroundColor: 'rgba(97,97,97,1)'
-                }}
-              >
-                <TYPE.white fontWeight={600} fontSize={14}>
-                  {t('Create new proposal')}
-                </TYPE.white>
-              </ButtonPrimary>
-            ) : accessForEditProposal ? (
-              <ButtonPrimary
-                disabled={disableButtonCreateProposal ? true : !accessForEditProposal}
-                style={{
-                  padding: '13px',
-                  width: '180px',
-                  backgroundColor: accessForEditProposal && !showBannerStaking && 'rgba(97,97,97,1)'
-                }}
-              >
-                <TYPE.white fontWeight={600} fontSize={14}>
-                  {t('Create new proposal')}
-                </TYPE.white>
-              </ButtonPrimary>
-            ) : disableButtonCreateProposal ? (
-              <ButtonPrimary
-                disabled={true}
-                style={{
-                  padding: '13px',
-                  width: '180px',
-                  backgroundColor: 'rgba(97,97,97,1)'
-                }}
-              >
-                <TYPE.white fontWeight={600} fontSize={14}>
-                  {t('Create new proposal')}
-                </TYPE.white>
-              </ButtonPrimary>
-            ) : (
-              <ButtonPrimary as={Link} to="/voting/create" style={{ padding: '13px', width: '180px' }}>
-                <TYPE.white fontWeight={600} fontSize={14}>
-                  {t('Create new proposal')}
-                </TYPE.white>
-              </ButtonPrimary>
-            )} */}
-          {/*</ButtonWrapper>*/}
-        </div>
-
-        {/*{showLoading ? (*/}
-        {/*  <Loading>*/}
-        {/*    /!* <Loader stroke="white" style={{ marginRight: '10px' }} /> *!/*/}
-        {/*    /!* <p>{'Loading'}</p> *!/*/}
-        {/*    /!*<NoWalletMessage>{t('voting.weAreWaitingUntilYouConnectToWallet')}</NoWalletMessage>*!/*/}
-        {/*  </Loading>*/}
-        {/*) : showList ? (*/}
-        {/*  <ListHeader>*/}
-        {/*    <div>ID</div>*/}
-        {/*    /!*<div>{t('voting.description')}</div>*!/*/}
-        {/*    /!*<div></div>*!/*/}
-        {/*    /!*<div>{t('voting.daysLeft')}</div>*!/*/}
-        {/*    /!*<div>{t('voting.votes')}</div>*!/*/}
-        {/*    /!*<div>{t('voting.voted')}</div>*!/*/}
-        {/*    /!*<div>{t('voting.status')}</div>*!/*/}
-        {/*  </ListHeader>*/}
-        {/*) : (*/}
-        {/*  <EmptyList>{t('voting.thereAreNoProposalsCreateYouOwn')}</EmptyList>*/}
-        {/*)}*/}
-
-        {/*{data.map((el, i) => {*/}
-        {/*  return <Proposal key={i} data={el} />*/}
-        {/*})}*/}
-      {/*</VotingWrapper>*/}
-    </>
+    <Wrapper>
+      <Title>Proposals list</Title>
+      <ProposalButton>
+        Create new proposal
+      </ProposalButton>
+    </Wrapper>
   )
 }
 

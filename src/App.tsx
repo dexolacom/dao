@@ -6,9 +6,11 @@ import { RPC } from './components/constants/constants';
 
 function App() {
   return (
-    <div className="App">
-      <VotingPage/>
-      <ConnectButton  RPC={RPC} portisId={"portisId-key-project"} />
+    <div className="app">
+      <div className='app-content'>
+        <ConnectButton  RPC={RPC} portisId={"portisId-key-project"} />
+        <VotingPage/>
+      </div>
     </div>
   );
 }
