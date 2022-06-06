@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 // import { isMobileOnly } from 'react-device-detect'
 import { useWeb3React } from '@web3-react/core'
-import {Wrapper, ProposalButton, Title} from './styles';
+import {Wrapper, Title} from './styles';
+import {Button} from '../../theme';
 
 // import Proposal from './Proposal'
 import { normalizeValue } from '../../constants/helpers'
@@ -15,7 +16,7 @@ import {
 } from '../../constants/constants';
 
 
-const ProposalList = ({ isOpenDelegationModal, setIsOpenDelegationModal }) => {
+const ProposalList = ({ isOpenDelegationModal, setIsOpenDelegationModal, setIsProposalEditorOpen }) => {
   const { account, chainId } = useWeb3React()
 
   const [disableDelegation, setDisableDelegation] = useState(true)
@@ -228,9 +229,9 @@ const ProposalList = ({ isOpenDelegationModal, setIsOpenDelegationModal }) => {
   return (
     <Wrapper>
       <Title>Proposals list</Title>
-      <ProposalButton>
+      <Button onClick={() => setIsProposalEditorOpen(true)}>
         Create new proposal
-      </ProposalButton>
+      </Button>
     </Wrapper>
   )
 }
