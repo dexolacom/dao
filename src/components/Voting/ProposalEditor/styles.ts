@@ -34,6 +34,7 @@ export const Input = styled.input`
   border-radius: 5px;
   background-color: #282c34;
   padding: 10px 20px;
+  color: grey;
   
   &::placeholder {
     color: grey;
