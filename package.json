@@ -29,7 +29,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.5",
-    "tech-web3-connector": "^1.3.2",
+    "tech-web3-connector": "^1.3.3",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0",
     "web3-react": "^5.0.5"

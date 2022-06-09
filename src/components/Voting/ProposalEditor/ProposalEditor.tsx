@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { web3 } from '../../constants/constants';
+import React, { useState } from 'react'
+import { web3, PROPOSALS_TOKEN_CONTRACT } from '../../constants/constants';
 import {Button} from '../../theme';
 import governorV1ABI from '../../constants/abis/governorV1ABI.json'
-// import { EditorState, convertFromRaw, convertToRaw, convertFromHTML } from 'draft-js'
-// import './style.css'
-// import Dropzone from 'react-dropzone'
-import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core';
 import { Content, ContentRow, Input, Wrapper } from './styles';
 import {ReactComponent as CrossIcon} from '../../../assets/icons/cross.svg';
@@ -19,91 +15,24 @@ const ProposalEditor = ({setIsProposalEditorOpen}:{setIsProposalEditorOpen: (b: 
     signatures: '',
     calldatas: ''
   })
-  console.log(inputs);
   const [isLoading, setIsLoading] = useState(false)
 
-  // // const history = useHistory()
-  // const [editorState, setEditorState] = useState(
-  //   localStorage.getItem('editorState')
-  //     ? EditorState.createWithContent(convertFromRaw(JSON.parse(localStorage.getItem('editorState'))))
-  //     : () => EditorState.createEmpty()
-  // )
-  const PROPOSALS_TOKEN_CONTRACT = new web3.eth.Contract(
-    governorV1ABI as any,
-    chainId === 97 || chainId === 56
-      ? '0x285432B4679c8Cd6E96E4214fC49aEeD1108B77b'
-      : '0x79D754cDC8b579F73bdB32a97A12fabC7662e658'
-  )
-  //
-  // const [value, setValue] = useState(0)
-  // const [error, setError] = useState(null)
-  // const [validated, setValidated] = useState({
-  //   title: true,
-  //   methodName: true,
-  //   address: true,
-  //   signatures: true,
-  //   calldatas: true
-  // })
-
-  // const [description, setDescription] = useState()
-  // const [file, setFile] = useState(null)
-  // const [loading, setIsLoading] = useState(false)
-  // const bytesToSize = bytes => {
-  //   const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
-  //   if (bytes == 0) return '0 Byte'
-  //   const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)))
-  //   return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i]
-  // }
-  //
-  // const fileReader = files => {
-  //   const f = files[0]
-  //
-  //   if (!f.type.match('application/json')) {
-  //     alert('Not a JSON file!')
-  //   } else {
-  //     const reader = new FileReader()
-  //     reader.onloadend = function(e) {
-  //       const result = JSON.parse(this.result)
-  //       setFile({ name: f.name, data: result, size: bytesToSize(f.size) })
-  //     }
-  //     reader.readAsText(f)
-  //   }
-  // }
-  //
-  // useEffect(() => {
-  //   localStorage.setItem('editorState', JSON.stringify(convertToRaw(editorState.getCurrentContent())))
-  // }, [editorState])
-  //
-
-  const send = async (address: string, values: string, signature: string, calldata: string) => {
+  const send = async (address: string, values: string, signature: string, calldata: string, desc: string) => {
+    console.log(PROPOSALS_TOKEN_CONTRACT);
     setIsLoading(true)
     await PROPOSALS_TOKEN_CONTRACT.methods
-      .propose([address], [values], [signature], [calldata])
+      .propose([address], [values], [signature], [calldata], desc)
       .send({
         from: account
       })
       .on('receipt', function() {
+        console.log('success');
         setIsLoading(false)
       })
       .on('error', function(error: any) {
-        // если сделать отмену или ошибка
-        console.error('error', error) //error.message
+        console.error('error', error)
       })
   }
-  //
-  // const checkForValidation = () => {
-  //   const newValidated = {}
-  //   let validForm = true
-  //   for (const key in inputs) {
-  //     if (inputs[key] === '') {
-  //       newValidated[key] = false
-  //       validForm = false
-  //     } else newValidated[key] = true
-  //   }
-  //   setValidated(newValidated)
-  //   return validForm
-  // }
-  //
 
   const createPropose = async () => {
     // if (!checkForValidation()) return false
@@ -119,20 +48,6 @@ const ProposalEditor = ({setIsProposalEditorOpen}:{setIsProposalEditorOpen: (b: 
 
     const proposalCount = await PROPOSALS_TOKEN_CONTRACT.methods.proposalCount().call()
     const votingId = +proposalCount + 1
-
-    // const raw = JSON.stringify({
-    //   votingId: votingId.toString(),
-    //   title,
-    //   chainId: chainId,
-    //   text: localStorage.getItem('editorState')
-    // })
-    //
-    // const requestOptions = {
-    //   method: 'POST',
-    //   headers: {},
-    //   body: raw,
-    //   redirect: 'follow'
-    // }
 
     await send(addressFormat, valueFormat, signaturesFormat, calldatasFormat)
   }
@@ -157,7 +72,7 @@ const ProposalEditor = ({setIsProposalEditorOpen}:{setIsProposalEditorOpen: (b: 
           <Input placeholder='Parameters value' onChange={e => setInputs({ ...inputs, calldatas: e.target.value })}/>
         </ContentRow>
         <ContentRow marginBottom={'0'}>
-          <Button onClick={() => createPropose()}>
+          <Button onClick={() => send('1', '2', '3', '4', 'hhe')}>
             Create new proposal
           </Button>
         </ContentRow>

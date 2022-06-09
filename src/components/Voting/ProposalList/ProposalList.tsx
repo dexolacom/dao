@@ -1,14 +1,14 @@
 // @ts-nocheck
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { useWeb3React } from '@web3-react/core'
-import {Wrapper, Title} from './styles';
-import {Button} from '../../theme';
+import { Wrapper, Title } from './styles';
+import { Button } from '../../theme';
 import { normalizeValue } from '../../constants/helpers'
 import {
   DELEGATIES_TOKEN_CONTRACT,
   LOCK_STAKING_GNBU_HARD_BIG_CONTRACT,
-  LOCK_STAKING_GNBU_HARD_SMALL_CONTRACT, PROPOSALS_TOKEN_CONTRACT,
+  LOCK_STAKING_GNBU_HARD_SMALL_CONTRACT,
+  PROPOSALS_TOKEN_CONTRACT,
   web3,
 } from '../../constants/constants';
 
@@ -39,8 +39,8 @@ const ProposalList = ({ isOpenDelegationModal, setIsOpenDelegationModal, setIsPr
       latestProposalIds = await PROPOSALS_TOKEN_CONTRACT.methods.latestProposalIds(account).call()
     }
 
-    // const sum = normalizeValue(balanceSmall) + normalizeValue(balanceBig)
-    //
+    const sum = normalizeValue(balanceSmall) + normalizeValue(balanceBig)
+
     // if (latestProposalIds) {
     //   PROPOSALS_TOKEN_CONTRACT.methods
     //     .state(latestProposalIds)
@@ -50,7 +50,7 @@ const ProposalList = ({ isOpenDelegationModal, setIsOpenDelegationModal, setIsPr
     //     })
     //     .catch(err => console.error(err))
     // }
-
+    //
     // const freeCirculation = await DELEGATIES_TOKEN_CONTRACT.methods.freeCirculation().call()
     // const delegated = await DELEGATIES_TOKEN_CONTRACT.methods.getCurrentVotes(account).call()
     //
@@ -210,19 +210,15 @@ const ProposalList = ({ isOpenDelegationModal, setIsOpenDelegationModal, setIsPr
   // }
 
   useEffect(() => {
-    if (account !== null) {
-      accessOrError()
-    }
+    if (account) accessOrError()
   }, [account])
 
-  // useEffect(() => {
-  //   if (account !== null) {
-  //     init()
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (account) init()
+  }, [])
 
   useEffect(() => {
-    if (account !== null) {
+    if (account) {
       setDisableDelegation(false)
       // init()
       setIsOpenDelegationModal(false)

@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="app">
       <div className='app-content'>
-        <ConnectButton  RPC={RPC} portisId={"portisId-key-project"} />
+        <ConnectButton RPC={RPC} portisId={"portisId-key-project"} />
         <VotingPage/>
       </div>
     </div>
