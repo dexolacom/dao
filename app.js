@@ -9,6 +9,7 @@ const MongoUri = config.get('mongoUri')
 
 app.use(cors())
 app.use('/api', require('./routes/createProposal.routes'))
+app.use('/api', require('./routes/getProposals.routes'))
 
 // connect to mongo
 const start = async () => {

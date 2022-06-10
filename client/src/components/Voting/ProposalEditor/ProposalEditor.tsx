@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import { web3, PROPOSALS_TOKEN_CONTRACT } from '../../constants/constants';
 import {Button} from '../../theme';
 import governorV1ABI from '../../constants/abis/governorV1ABI.json'
@@ -44,6 +44,17 @@ const ProposalEditor = ({setIsProposalEditorOpen}:{setIsProposalEditorOpen: (b: 
       .then(res => console.log(res.data))
       .catch(error => console.log(error))
   }
+
+  const getProposals = async () => {
+    await axios.get("http://localhost:5000/api/proposals")
+      .then(res => console.log(res.data))
+      .catch(error => console.log(error))
+  }
+
+  useEffect(() => {
+    getProposals()
+  }, []);
+
 
 
   // const send = async (address: string, values: string, signature: string, calldata: string, desc: string) => {
