@@ -8,7 +8,7 @@ router.use(express.json())
 // api/proposals
 router.get('/proposals', async(request, response) => {
   try {
-    const proposals = await Proposal
+    const proposals = await Proposal.find()
     response.json(proposals)
     response.status(200).json({message: 'Proposals list getting successfully'})
   } catch (e) {
