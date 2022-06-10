@@ -4,8 +4,8 @@ const schema = new Schema({
   title: {type: String},
   address: {type: String},
   methodName: {type: String},
-  signatures: {type: Array},
-  calldatas: {type: Array}
+  signatures: {type: String},
+  calldatas: {type: String}
 })
 
 module.exports = model('Proposal', schema)

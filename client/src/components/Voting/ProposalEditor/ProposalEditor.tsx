@@ -6,6 +6,7 @@ import { useWeb3React } from '@web3-react/core';
 import { Content, ContentRow, Input, Wrapper } from './styles';
 import { ReactComponent as CrossIcon } from '../../../assets/icons/cross.svg';
 import { useHttp } from '../../hooks/useHTTP';
+import axios from 'axios';
 
 const ProposalEditor = ({setIsProposalEditorOpen}:{setIsProposalEditorOpen: (b: boolean) => void}) => {
   const {loading, request} = useHttp()
@@ -22,14 +23,27 @@ const ProposalEditor = ({setIsProposalEditorOpen}:{setIsProposalEditorOpen: (b: 
     setInputs({...inputs, [event.target.name]: event.target.value})
   };
 
+  // const createProposal = async () => {
+  //   try {
+  //     const data = request('/api/createProposal', 'POST', {...inputs})
+  //     console.log(data)
+  //   } catch (e: any) {
+  //     console.log(e.message)
+  //   }
+  // };
+
   const createProposal = async () => {
-    try {
-      const data = request('/api/createProposal', 'POST', {...inputs})
-      console.log(data)
-    } catch (e: any) {
-      console.log(e.message)
-    }
-  };
+    // e.preventDefault()
+   await axios.post("http://localhost:5000/api/createProposal", {
+      method: 'POST',
+      body: JSON.stringify({...inputs}),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+      .then(res => console.log(res.data))
+      .catch(error => console.log(error))
+  }
 
 
   // const send = async (address: string, values: string, signature: string, calldata: string, desc: string) => {
