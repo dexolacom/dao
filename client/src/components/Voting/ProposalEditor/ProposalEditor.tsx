@@ -23,15 +23,6 @@ const ProposalEditor = ({setIsProposalEditorOpen}:{setIsProposalEditorOpen: (b: 
     setInputs({...inputs, [event.target.name]: event.target.value})
   };
 
-  // const createProposal = async () => {
-  //   try {
-  //     const data = request('/api/createProposal', 'POST', {...inputs})
-  //     console.log(data)
-  //   } catch (e: any) {
-  //     console.log(e.message)
-  //   }
-  // };
-
   const createProposal = async () => {
     // e.preventDefault()
    await axios.post("http://localhost:5000/api/createProposal", {
