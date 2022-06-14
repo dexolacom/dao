@@ -1,16 +1,20 @@
 // @ts-nocheck
 import React, { useState, useEffect } from 'react'
 import { useWeb3React } from '@web3-react/core'
-import { Wrapper, Title } from './styles';
-import { Button } from '../../theme';
-import { normalizeValue } from '../../constants/helpers'
+import { Wrapper, Title, TitleContainer } from './styles';
+import { Button } from '../theme';
+import { normalizeValue } from '../constants/helpers'
 import {
   DELEGATIES_TOKEN_CONTRACT,
   LOCK_STAKING_GNBU_HARD_BIG_CONTRACT,
   LOCK_STAKING_GNBU_HARD_SMALL_CONTRACT,
   PROPOSALS_TOKEN_CONTRACT,
   web3,
-} from '../../constants/constants';
+} from '../constants/constants';
+import {getProposals} from '../constants/requests';
+import Proposal from '../Proposal/Proposal';
+import Loader from '../Loader/Loader';
+import {add} from 'husky';
 
 
 const ProposalList = ({ isOpenDelegationModal, setIsOpenDelegationModal, setIsProposalEditorOpen }) => {
@@ -26,6 +30,8 @@ const ProposalList = ({ isOpenDelegationModal, setIsOpenDelegationModal, setIsPr
   const [showList, setShowList] = useState(true)
   const [disableButtonCreateProposal, setDisableButtonCreateProposal] = useState(false)
   const [data, setData] = useState([])
+  const [proposals, setProposals] = useState([])
+  const [isProposalsLoading, setIsProposalsLoading] = useState(true)
 
   // banner warning (voting, staking)
   const accessOrError = async () => {
@@ -215,22 +221,35 @@ const ProposalList = ({ isOpenDelegationModal, setIsOpenDelegationModal, setIsPr
 
   useEffect(() => {
     if (account) init()
+    getProposals().then(proposals => {
+      setProposals(proposals.data)
+      setIsProposalsLoading(false)
+    })
   }, [])
 
-  useEffect(() => {
-    if (account) {
-      setDisableDelegation(false)
-      // init()
-      setIsOpenDelegationModal(false)
-    }
-  }, [account])
+  // useEffect(() => {
+  //   if (account) {
+  //     setDisableDelegation(false)
+  //     // init()
+  //     setIsOpenDelegationModal(false)
+  //   }
+  // }, [account])
 
   return (
     <Wrapper>
-      <Title>Proposals list</Title>
-      <Button onClick={() => setIsProposalEditorOpen(true)}>
-        Create new proposal
-      </Button>
+      <TitleContainer>
+        <Title>Proposals list</Title>
+        <Button onClick={() => setIsProposalEditorOpen(true)}>
+          Create new proposal
+        </Button>
+      </TitleContainer>
+      {isProposalsLoading
+        ? <Loader/>
+        : proposals.map((proposal, index) => {
+          const {title, address, methodName} = proposal
+          return <Proposal key={index} title={title} address={address} methodName={methodName}/>
+        })
+      }
     </Wrapper>
   )
 }

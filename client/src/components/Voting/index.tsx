@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import ProposalList from './ProposalList/ProposalList'
+import ProposalList from '../ProposalList/ProposalList'
 import { ConnectButton } from 'tech-web3-connector';
-import ProposalEditor from './ProposalEditor/ProposalEditor';
+import ProposalEditor from '../ProposalEditor/ProposalEditor';
 // import DelegationModal from './DelegationModal'
 
 const Voting = () => {

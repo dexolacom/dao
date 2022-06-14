@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react'
-import { web3, PROPOSALS_TOKEN_CONTRACT } from '../../constants/constants';
-import {Button} from '../../theme';
-import governorV1ABI from '../../constants/abis/governorV1ABI.json'
+import { web3, PROPOSALS_TOKEN_CONTRACT } from '../constants/constants';
+import {Button} from '../theme';
+import governorV1ABI from '../constants/abis/governorV1ABI.json'
 import { useWeb3React } from '@web3-react/core';
 import { Content, ContentRow, Input, Wrapper } from './styles';
-import { ReactComponent as CrossIcon } from '../../../assets/icons/cross.svg';
-import { useHttp } from '../../hooks/useHTTP';
+import { ReactComponent as CrossIcon } from '../../assets/icons/cross.svg';
+import { useHttp } from '../constants/hooks/useHTTP';
 import axios from 'axios';
+import {createProposal} from '../constants/requests';
 
 const ProposalEditor = ({setIsProposalEditorOpen}:{setIsProposalEditorOpen: (b: boolean) => void}) => {
   const {loading, request} = useHttp()
@@ -22,30 +23,6 @@ const ProposalEditor = ({setIsProposalEditorOpen}:{setIsProposalEditorOpen: (b: 
   const inputHandler = (event:React.ChangeEvent<HTMLInputElement>) => {
     setInputs({...inputs, [event.target.name]: event.target.value})
   };
-
-  const createProposal = async () => {
-    // e.preventDefault()
-   await axios.post("http://localhost:5000/api/createProposal", {
-      method: 'POST',
-      body: {...inputs},
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
-      .then(res => console.log(res.data))
-      .catch(error => console.log(error))
-  }
-
-  const getProposals = async () => {
-    await axios.get("http://localhost:5000/api/proposals")
-      .then(res => console.log(res.data))
-      .catch(error => console.log(error))
-  }
-
-  useEffect(() => {
-    getProposals()
-  }, []);
-
 
 
   // const send = async (address: string, values: string, signature: string, calldata: string, desc: string) => {
@@ -102,7 +79,7 @@ const ProposalEditor = ({setIsProposalEditorOpen}:{setIsProposalEditorOpen: (b: 
           <Input placeholder='Parameters value' name='calldatas' onChange={inputHandler}/>
         </ContentRow>
         <ContentRow marginBottom={'0'}>
-          <Button onClick={() => createProposal()}>
+          <Button onClick={() => createProposal(inputs)}>
             Create new proposal
           </Button>
         </ContentRow>
