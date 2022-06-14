@@ -27,7 +27,7 @@ const ProposalEditor = ({setIsProposalEditorOpen}:{setIsProposalEditorOpen: (b: 
     // e.preventDefault()
    await axios.post("http://localhost:5000/api/createProposal", {
       method: 'POST',
-      body: JSON.stringify({...inputs}),
+      body: {...inputs},
       headers: {
         'Content-Type': 'application/json'
       },

@@ -7,14 +7,15 @@ router.use(express.json())
 // api/createProposal
 router.post('/createProposal', async(request, response) => {
   try {
-    const {title, address, methodName, signatures, calldatas} = request.body
+    const {title, address, methodName, signatures, calldatas} = request.body.body
+
     const proposal = new Proposal(
       {
-        title,
-        address,
-        methodName,
-        signatures,
-        calldatas
+        title: title,
+        address: address,
+        methodName: methodName,
+        signatures: signatures,
+        calldatas: calldatas
       }
     )
     await proposal.save()
