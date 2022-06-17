@@ -17,7 +17,7 @@ import Loader from '../Loader/Loader';
 import {add} from 'husky';
 
 
-const ProposalList = ({ isOpenDelegationModal, setIsOpenDelegationModal, setIsProposalEditorOpen }) => {
+const ProposalList = ({setIsProposalEditorOpen }) => {
   const { account, chainId } = useWeb3React()
 
   const [disableDelegation, setDisableDelegation] = useState(true)

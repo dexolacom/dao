@@ -3,3 +3,8 @@ export interface ProposalProps {
   address: string
   methodName: string
 }
+
+export interface BackdropProps {
+  children: JSX.Element[] | JSX.Element
+  setIsProposalEditorOpen: (b:boolean) => void
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Content, Title, Wrapper, Text } from './styles';
+import { Content, Wrapper, TextContainer, TextContainerName, Text} from './styles';
 import {ProposalProps} from '../constants/types';
 
 const Proposal = ({title, address, methodName}:ProposalProps) => {
@@ -7,9 +7,18 @@ const Proposal = ({title, address, methodName}:ProposalProps) => {
   return (
     <Wrapper>
       <Content>
-        <Title>{title}</Title>
-        <Text>{address}</Text> <br/>
-        <Text>{methodName}</Text>
+        <TextContainer>
+          <TextContainerName>Title</TextContainerName>
+          <Text>{title}</Text>
+        </TextContainer>
+        <TextContainer>
+          <TextContainerName>Address</TextContainerName>
+          <Text>{address}</Text>
+        </TextContainer>
+        <TextContainer>
+          <TextContainerName>Method</TextContainerName>
+          <Text>{methodName}</Text>
+        </TextContainer>
       </Content>
     </Wrapper>
   );

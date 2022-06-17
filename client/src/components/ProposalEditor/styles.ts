@@ -1,22 +1,23 @@
 import styled from 'styled-components';
+import { ReactComponent as Cross } from '../../assets/icons/cross.svg';
 
 export const Wrapper = styled.div`
   background-color: #1d2125;
   border-radius: 5px;
-  max-width: 400px;
   margin: 0 auto;
   position: relative;
-  
-  svg {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-  }
+`
+
+export const CrossIcon = styled(Cross)`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 `
 
 export const Content = styled.div`
   padding: 3em 2em 2em 2em;
+  width: 350px;
 `
 
 export const ContentRow = styled.div<{marginBottom?: string}>`
