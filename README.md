@@ -1,2 +1,3 @@
 # Getting Started with Create React App
-Clean react typescript app with linter, prettier and husky
+
+For start project enter ```yarn dev``` this command will launch server and client
