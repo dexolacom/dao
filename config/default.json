@@ -1,0 +1,4 @@
+{
+  "port": 5000,
+  "mongoUri": "mongodb+srv://TechBand:Techband123@cluster0.jj9rros.mongodb.net/?retryWrites=true&w=majority"
+}

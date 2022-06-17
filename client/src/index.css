@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+body {
+  background-color: #282c34;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+.app {
+  min-height: 100vh;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.app-content {
+  padding: 2em;
+}
